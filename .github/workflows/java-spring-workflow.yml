@@ -6,6 +6,12 @@ on:
       SONAR_PROJECT_KEY:
         required: true
         type: string
+      ARTIFACT_NAME:
+        required: true
+        type: string
+      ARTIFACT_PATH:
+        required: true
+        type: string
     secrets:
       SONAR_TOKEN:
         required: true
@@ -47,9 +53,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=${{ inputs.SONAR_PROJECT_KEY }}
-        
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: artifacts
-          path: target/overengineered*.jar
+          name: ${{ inputs.ARTIFACT_NAME }}
+          path: ${{ inputs.ARTIFACT_PATH }}
