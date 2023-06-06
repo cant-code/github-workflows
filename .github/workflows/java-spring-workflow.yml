@@ -59,3 +59,4 @@ jobs:
         with:
           name: ${{ inputs.ARTIFACT_NAME }}
           path: ${{ inputs.ARTIFACT_PATH }}
+          retention-days: 1
