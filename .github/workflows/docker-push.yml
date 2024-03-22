@@ -12,6 +12,10 @@ on:
       ARTIFACT_PATH:
         required: true
         type: string
+      DOCKERFILE_PATH:
+        required: false
+        type: string
+        default: ./Dockerfile
     secrets:
       DOCKERHUB_USERNAME:
         required: true
@@ -46,6 +50,6 @@ jobs:
         uses: docker/build-push-action@v5.3.0
         with:
           context: .
-          file: ./Dockerfile
+          file: ${{ inputs.DOCKERFILE_PATH }}
           push: true
           tags: ${{ inputs.DOCKER_TAG }}:latest
