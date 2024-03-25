@@ -16,6 +16,16 @@ on:
         required: false
         type: boolean
         default: true
+      EXTRA_ARTIFACT:
+        required: false
+        default: false
+        type: boolean
+      EXTRA_ARTIFACT_NAME:
+        required: false
+        type: string
+      EXTRA_ARTIFACT_PATH:
+        required: false
+        type: string
     secrets:
       SONAR_TOKEN:
         required: true
@@ -63,5 +73,13 @@ jobs:
         if: inputs.CREATE_ARTIFACT == true
         with:
           name: ${{ inputs.ARTIFACT_NAME }}
+          path: ${{ inputs.ARTIFACT_PATH }}
+          retention-days: 1
+
+      - name: Upload Extra Artifacts
+        uses: actions/upload-artifact@v4.3.1
+        if: inputs.EXTRA_ARTIFACT == true
+        with:
+          name: ${{ inputs.EXTRA_ARTIFACT_NAME }}
           path: ${{ inputs.ARTIFACT_PATH }}
           retention-days: 1
