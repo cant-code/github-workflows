@@ -81,5 +81,5 @@ jobs:
         if: inputs.EXTRA_ARTIFACT == true
         with:
           name: ${{ inputs.EXTRA_ARTIFACT_NAME }}
-          path: ${{ inputs.ARTIFACT_PATH }}
+          path: ${{ inputs.EXTRA_ARTIFACT_PATH }}
           retention-days: 1
